@@ -48,6 +48,6 @@ public class BasketTest {
 
     @AfterTest
     void stop() {
-
+        driver.quit();
     }
 }
