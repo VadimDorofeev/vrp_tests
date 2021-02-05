@@ -8,9 +8,10 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
 
-public class NewUserTest {
+public class NewProductTest {
 
     WebDriver driver = new FirefoxDriver();
     @BeforeTest
@@ -22,7 +23,8 @@ public class NewUserTest {
 
     @Test
     void test() {
-        String name = "test product";
+        String timestamp = new SimpleDateFormat("HH.mm.ss").format(new java.util.Date());
+        String name = "test product " + timestamp;
 
         driver.findElement(By.xpath("//input[@name='username']")).sendKeys("admin");
         driver.findElement(By.xpath("//input[@name='password']")).sendKeys("admin");
@@ -30,15 +32,14 @@ public class NewUserTest {
 
         driver.findElement(By.xpath("//a[contains(@href,'catalog')]")).click();
         driver.findElement(By.xpath("//a[contains(@href,'edit_product')]")).click();
-        driver.findElement(By.xpath("//input[@name='name[en]']")).sendKeys("test product name");
+        driver.findElement(By.xpath("//input[@name='name[en]']")).sendKeys(name);
 
-        driver.findElement(By.xpath("//input[@name='new_images[]']")).sendKeys("img_forest.jpg");
+        driver.findElement(By.xpath("//input[@name='new_images[]']")).sendKeys("C:\\Users\\Vdorofeev\\Desktop\\vrp_tests\\vrp_tests\\tests\\img.jpg");
         driver.findElement(By.xpath("//button[@name='save']")).click();
 
-        Assert.assertTrue(driver.findElements(By.xpath("//*[text()='" + name + "']")).size() > 0);
+        Assert.assertTrue(driver.findElements(By.xpath("//a[contains(text(),'" + name + "')]")).size() > 0);
 
     }
-
 
     @AfterTest
     void stop() {
