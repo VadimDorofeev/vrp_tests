@@ -33,13 +33,13 @@ public class BasketTest {
         String basketXpath = "//span[@class='quantity']";
 
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i <= 3; i++) {
             driver.findElement(By.xpath("//div[contains(text(),'" + name + "')]")).click();
             Select size = new Select(driver.findElement(By.xpath("//select[@name='options[Size]']")));
             size.selectByValue("Small");
             driver.findElement(By.xpath("//button[@name='add_cart_product']")).click();
             WebElement basket = driver.findElement(By.xpath(basketXpath));
-            wait.until(ExpectedConditions.attributeToBe(basket, "textContent", "i"));
+            wait.until(ExpectedConditions.attributeToBe(basket, "textContent", String.valueOf(i)));
             driver.findElement(By.xpath("//i[@class='fa fa-home']")).click();
         }
 
